@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+
+// 匯入其餘 Components
+import InputForm from './InputForm.js';
+import TodoList from './TodoList.js';
+
+function App () {
+  const [inputText, setInputText] = useState('');
+  console.log(inputText);
+  // Todo 的內容要有 {assignment: xxx, isCompleted, id:xxx}
+  const [todos, setTodos] = useState([]);
+  console.log(todos);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {console.log('App render')}
+      <InputForm
+        inputText={inputText}
+        setInputText={setInputText}
+        setTodos={setTodos}
+        todos={todos}
+      />
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+      />
+
     </div>
   );
 }
