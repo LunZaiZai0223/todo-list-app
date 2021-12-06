@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // 匯入其他 Component
 import Todo from './Todo.js';
 
 
 const TodoList = (props) => {
-  const { todos, setTodos, filterState, filterTodos } = props;
+  const { todos, setTodos, filterState, filterTodos, setEditingInput, editingInput } = props;
+  const { todoItemEditing, setTodoItemEditing } = useState(false);
   console.log(todos);
 
   // function ShowAllTodos () {
@@ -31,6 +32,9 @@ const TodoList = (props) => {
               todo={todo}
               setTodos={setTodos}
               todos={todos}
+              setTodoItemEditing={setTodoItemEditing}
+              setEditingInput={setEditingInput}
+              editingInput={editingInput}
             />
           )
         })}

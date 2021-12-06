@@ -14,7 +14,8 @@ const InputForm = (props) => {
     console.log('發送表單');
     setTodos([
       ...todos,
-      { assignment: inputText, isCompleted: false, id: Math.random() * 500 }
+      { assignment: inputText, isCompleted: false, isEditing: false, id: Math.random() * 500 }
+
     ]);
     setInputText('');
   }

@@ -13,6 +13,7 @@ function App () {
   const [todos, setTodos] = useState([]);
   const [filterState, setFilterState] = useState('all');
   const [filterTodos, setFilterTodos] = useState([]);
+  const [editingInput, setEditingInput] = useState('');
 
   // useEffect section
   // useEffect(() => { changeFilterTodos(); }, []);
@@ -58,6 +59,8 @@ function App () {
         setTodos={setTodos}
         filterState={filterState}
         filterTodos={filterTodos}
+        setEditingInput={setEditingInput}
+        editingInput={editingInput}
       />
       <FilterButtons
         setFilterState={setFilterState}

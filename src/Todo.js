@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Todo = ({ todos, todo, setTodos }) => {
+const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEditingInput }) => {
+  // const [editingInput, setEditingInput] = useState('');
   console.log(todo);
-
   // Events
-  function handleClick (btnType) {
+  function handleClickInTodoItem (btnType) {
     if (btnType === 'delete') {
       deleteAssignment();
     } else if (btnType === 'complete') {
       changeAssignmentState();
+    } else if (btnType === 'edit') {
+      editTodoItem();
     }
   }
 
+  function handleClickInEditingTodoItem (btnType) {
+    if (btnType === 'cancel') {
+      cancelEditingTodoItem();
+    } else if (btnType === 'save') {
+
+    }
+  }
+
+  function handleSubmitInEditingTodoItem (event) {
+    event.preventDefault();
+  }
+  function handleChangeInEditingTodoItem (event) {
+    console.log(event.target.value);
+    setEditingInput(event.target.value);
+
+  }
   // 事件判斷
   function deleteAssignment () {
     // const foundTodo = todos.filter((item) => item.id === todo.id);
@@ -34,13 +52,79 @@ const Todo = ({ todos, todo, setTodos }) => {
       return item;
     }));
   }
+  function editTodoItem () {
+    setTodos(todos.map((item) => {
+      if (item.id === todo.id) {
+        return {
+          ...item,
+          isEditing: true
+        };
+      }
+    }));
+  }
+  function cancelEditingTodoItem () {
+    setTodos(todos.map((item) => {
+      if (item.id === todo.id) {
+        return {
+          ...item,
+          isEditing: false
+        };
+      }
+    }));
+  }
+  function saveEditingResult () {
+    setTodos(todos.map((item) => {
+      if (item.id === todo.id) {
+        return {
+          ...item,
 
+        }
+      }
+    }))
+  }
+  function CreateTodoItem (props) {
+    const { todo } = props;
+    if (!todo.isEditing) {
+      return (
+        <div key={todo.id} className="todo-item-wrapper">
+          <li className="todo-item">{todo.assignment}</li>
+          <button onClick={() => handleClickInTodoItem('delete')}>刪除</button>
+          <button onClick={() => handleClickInTodoItem('complete')}>完成</button>
+          <button onClick={() => handleClickInTodoItem('edit')}>修改</button>
+        </div>
+      );
+    } return null
+  }
+
+  function CreateEditingTodoItem (props) {
+    const { todo } = props;
+    if (todo.isEditing) {
+      return (
+        <div key={todo.id} className="todo-editing-item-wrapper">
+          <form
+            onSubmit={handleSubmitInEditingTodoItem}
+          >
+            <p>把 {todo.assignment} 改成</p>
+            <input
+              type="text"
+              value={editingInput}
+              onChange={handleChangeInEditingTodoItem}
+            />
+            <div className="todo-editing-item-button-wrapper">
+              <button onClick={() => handleClickInEditingTodoItem('cancel')}>Cancel</button>
+              <button>Save</button>
+            </div>
+          </form>
+        </div>
+      )
+    }
+    return null
+  }
   return (
-    <div className="todo-item-wrapper">
-      <li className="todo-item">{todo.assignment}</li>
-      <button onClick={() => handleClick('delete')}>刪除</button>
-      <button onClick={() => handleClick('complete')}>完成</button>
-    </div>
+    <>
+      <CreateTodoItem todo={todo} />
+      <CreateEditingTodoItem todo={todo} />
+    </>
   );
 };
 
