@@ -4,6 +4,8 @@ const InputForm = (props) => {
   const { todos, setTodos, inputText, setInputText } = props;
   console.log(inputText);
   console.log(todos);
+
+  // Events
   function handleChange (event) {
     setInputText(event.target.value);
   }

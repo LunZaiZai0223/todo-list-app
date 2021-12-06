@@ -3,14 +3,28 @@ import React from 'react';
 // 匯入其他 Component
 import Todo from './Todo.js';
 
+
 const TodoList = (props) => {
-  const { todos, setTodos } = props;
+  const { todos, setTodos, filterState, filterTodos } = props;
   console.log(todos);
 
+  // function ShowAllTodos () {
+  // return (
+  // {todos.map((todo) => {
+  // return (
+  // <Todo 
+  // key={todo.id}
+  // todo={todo}
+  // setTodo={setTodo}
+  // /> 
+  // );
+  // })}
+  // );
+  // }
   return (
     <div className="todo-list-container">
       <ul className="todo-item">
-        {todos.map((todo) => {
+        {filterTodos.map((todo) => {
           return (
             <Todo
               key={todo.id}
@@ -24,4 +38,5 @@ const TodoList = (props) => {
     </div>
   );
 };
+
 export default TodoList;
