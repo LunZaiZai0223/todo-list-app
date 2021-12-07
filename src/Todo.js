@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEditingInput }) => {
+const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEditingInput, isEditing, setIsEditing }) => {
   // const [editingInput, setEditingInput] = useState('');
   console.log(todo);
   // Events
@@ -23,6 +23,7 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
   }
 
   function handleSubmitInEditingTodoItem (event) {
+    console.log('submitGO')
     event.preventDefault();
   }
   function handleChangeInEditingTodoItem (event) {
@@ -53,14 +54,15 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
     }));
   }
   function editTodoItem () {
-    setTodos(todos.map((item) => {
-      if (item.id === todo.id) {
-        return {
-          ...item,
-          isEditing: true
-        };
-      }
-    }));
+    // setTodos(todos.map((item) => {
+    // if (item.id === todo.id) {
+    // return {
+    // ...item,
+    // isEditing: true
+    // };
+    // }
+    // }));
+    setIsEditing(todo.id);
   }
   function cancelEditingTodoItem () {
     setTodos(todos.map((item) => {
@@ -84,46 +86,61 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
   }
   function CreateTodoItem (props) {
     const { todo } = props;
-    if (!todo.isEditing) {
-      return (
-        <div key={todo.id} className="todo-item-wrapper">
-          <li className="todo-item">{todo.assignment}</li>
-          <button onClick={() => handleClickInTodoItem('delete')}>刪除</button>
-          <button onClick={() => handleClickInTodoItem('complete')}>完成</button>
-          <button onClick={() => handleClickInTodoItem('edit')}>修改</button>
-        </div>
-      );
-    } return null
+    // if (!todo.isEditing) {
+    return (
+      <div key={todo.id} className="todo-item-wrapper">
+        {console.log(isEditing)}
+        {isEditing === todo.id ? (<form onSubmit={handleSubmitInEditingTodoItem} className="edit-todo-form">
+          <p>把 {todo.assignment} 改成</p>
+          <input
+            type="text"
+            value={editingInput}
+            onChange={(event) => setEditingInput(event.target.value)}
+
+          />
+          <div className="edit-button-wrapper">
+            <button>Cancel</button>
+            <button>Save</button>
+          </div>
+        </form>) :
+          (<>
+            <li className="todo-item">{todo.assignment}</li>
+            <button onClick={() => handleClickInTodoItem('delete')}>刪除</button>
+            <button onClick={() => handleClickInTodoItem('complete')}>完成</button>
+            <button onClick={() => handleClickInTodoItem('edit')}>修改</button> </>)
+        }
+      </div>
+    );
+    // } return null
   }
 
-  function CreateEditingTodoItem (props) {
-    const { todo } = props;
-    if (todo.isEditing) {
-      return (
-        <div key={todo.id} className="todo-editing-item-wrapper">
-          <form
-            onSubmit={handleSubmitInEditingTodoItem}
-          >
-            <p>把 {todo.assignment} 改成</p>
-            <input
-              type="text"
-              value={editingInput}
-              onChange={handleChangeInEditingTodoItem}
-            />
-            <div className="todo-editing-item-button-wrapper">
-              <button onClick={() => handleClickInEditingTodoItem('cancel')}>Cancel</button>
-              <button>Save</button>
-            </div>
-          </form>
-        </div>
-      )
-    }
-    return null
-  }
+  // function CreateEditingTodoItem (props) {
+  // const { todo } = props;
+  // // if (todo.isEditing) {
+  // return (
+  // <div key={todo.id} className="todo-editing-item-wrapper">
+  // <form
+  // onSubmit={handleSubmitInEditingTodoItem}
+  // >
+  // <p>把 {todo.assignment} 改成</p>
+  // <input
+  // type="text"
+  // value={editingInput}
+  // onChange={handleChangeInEditingTodoItem}
+  // />
+  // <div className="todo-editing-item-button-wrapper">
+  // <button onClick={() => handleClickInEditingTodoItem('cancel')}>Cancel</button>
+  // <button>Save</button>
+  // </div>
+  // </form>
+  // </div>
+  // )
+  // // }
+  // // return null
+  // }
   return (
     <>
       <CreateTodoItem todo={todo} />
-      <CreateEditingTodoItem todo={todo} />
     </>
   );
 };
