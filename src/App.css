@@ -1,3 +1,9 @@
+:root {
+  --purple: #666afb;
+  --grey: #c0c1cf;
+  --red: #fb6b6c;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -7,6 +13,16 @@
 ul li {
   list-style-type: none;
 }
+
+body,
+body button {
+  font-family: "Barlow Semi Condensed";
+}
+
+button {
+  cursor: pointer;
+}
+
 html,
 body,
 #root {
@@ -23,5 +39,72 @@ body,
 }
 
 .todo-card {
+  min-width: 450px;
   border: 1px solid red;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.date-wrapper .date {
+  color: var(--purple);
+  font-size: 35px;
+}
+.date-wrapper .date span {
+  font-weight: 600;
+}
+
+.date-wrapper .month {
+  font-size: 24px;
+  color: var(--grey);
+  font-weight: 500;
+}
+
+.task-wrapper {
+  font-size: 20px;
+  color: var(--grey);
+}
+.task-wrapper span {
+  font-weight: 600;
+}
+
+.todo-input-form {
+  padding: 1rem;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.input-wrapper .todo-input {
+  flex: 1 1 75%;
+  font-size: 24px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  outline: none;
+}
+.input-wrapper .todo-input-submit {
+  flex: 1;
+  font-size: 30px;
+  border-radius: 50%;
+  border: none;
+  padding: 5px 0;
+  background-color: var(--red);
+  color: #fff;
+  cursor: pointer;
+}
+
+.filter-buttons-container {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.filter-buttons-container button {
+  flex: 1;
 }
