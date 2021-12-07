@@ -22,8 +22,8 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
     }
   }
 
-  function handleSubmitInEditingTodoItem (event) {
-    console.log('submitGO')
+  function handleSubmitInEditingTodoItem (event, id) {
+    console.log('submitGO');
     event.preventDefault();
   }
   function handleChangeInEditingTodoItem (event) {
@@ -33,12 +33,6 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
   }
   // 事件判斷
   function deleteAssignment () {
-    // const foundTodo = todos.filter((item) => item.id === todo.id);
-    // console.log(foundTodo);
-    // const index = todos.indexOf(foundTodo);
-    // todos = todos.splice(index, 1);
-    // console.log(todos);
-    // setTodos(todos);
     setTodos(todos.filter((item) => item.id !== todo.id));
   }
   function changeAssignmentState () {
@@ -90,13 +84,12 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
     return (
       <div key={todo.id} className="todo-item-wrapper">
         {console.log(isEditing)}
-        {isEditing === todo.id ? (<form onSubmit={handleSubmitInEditingTodoItem} className="edit-todo-form">
+        {isEditing === todo.id ? (<form onSubmit={() => handleSubmitInEditingTodoItem} className="edit-todo-form">
           <p>把 {todo.assignment} 改成</p>
           <input
             type="text"
             value={editingInput}
             onChange={(event) => setEditingInput(event.target.value)}
-
           />
           <div className="edit-button-wrapper">
             <button>Cancel</button>
@@ -109,7 +102,7 @@ const Todo = ({ todos, todo, setTodos, setTodoItemEditing, editingInput, setEdit
             <button onClick={() => handleClickInTodoItem('complete')}>完成</button>
             <button onClick={() => handleClickInTodoItem('edit')}>修改</button> </>)
         }
-      </div>
+      </div >
     );
     // } return null
   }

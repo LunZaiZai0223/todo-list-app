@@ -26,14 +26,6 @@ const TodoList = (props) => {
       return todo;
     });
     console.log(updateTodo);
-    // setTodos(todos.map((todo) => {
-    // if (todo.id === id) {
-    // return {
-    // ...todo,
-    // isCompleted: !todo.isCompleted
-    // };
-    // }
-    // }));
     setTodos(updateTodo);
   }
   function deleteTodo (id) {
@@ -41,65 +33,29 @@ const TodoList = (props) => {
   }
 
   // Submit Event
-  function handleSubmit (event) {
+  function handleSubmit (event, id) {
     event.preventDefault();
+    editTodoItem(id);
   }
 
-  // Click Event In Editing Todo Item
-  function handleClickInEditingTodoItem (btnType, id) {
-    if (btnType === 'cancel') {
-      stopEditingTodoItem();
-
-    } else if (btnType === 'save') {
-      editTodoItem(id);
-    }
-
-  }
-
+  // Save Editing
   function editTodoItem (id) {
-    // console.log((todos.map((todo) => {
-    // if (todo.id === id) {
-    // return {
-    // ...todo,
-    // assignment: editingInput
-    // };
-    // }
-    // })));
     const updateTodoItem = [...todos].map((todo) => {
       if (todo.id === id) {
         todo.assignment = editingInput;
       }
       return todo;
     });
-    // setTodos(todos.map((todo) => {
-    // if (todo.id === id) {
-    // return {
-    // ...todo,
-    // assignment: editingInput
-    // };
-    // }
-    // }));
-    // console.log(updateTodoItem);
     setTodos(updateTodoItem);
     setIsEditing(null);
     setEditingInput('');
   }
-  function stopEditingTodoItem (id) {
+
+  // Cancel Editing
+  function stopEditingTodoItem () {
     setIsEditing(null);
   }
-  // function ShowAllTodos () {
-  // return (
-  // {todos.map((todo) => {
-  // return (
-  // <Todo 
-  // key={todo.id}
-  // todo={todo}
-  // setTodo={setTodo}
-  // /> 
-  // );
-  // })}
-  // );
-  // }
+
   return (
     <div className="todo-list-container">
       <ul className="todo-list">
@@ -107,17 +63,15 @@ const TodoList = (props) => {
           {isEditing === todo.id ? (
             <div className="todo-edit-item">
               <form
-                onSubmit={handleSubmit}
+                onSubmit={(event) => handleSubmit(event, todo.id)}
               >
                 <p>把 {todo.assignment} 改成</p>
                 <input
-                  type="text"
                   onChange={(event) => setEditingInput(event.target.value)}
-                  onKeyDown={(event) => { console.log(event, 'keydownEvent!') }}
                 />
                 <div className="edit-button-group">
-                  <button onClick={() => handleClickInEditingTodoItem('cancel')}>Cancel</button>
-                  <button onClick={() => handleClickInEditingTodoItem('save', todo.id)}>Save</button>
+                  <button type="button" onClick={stopEditingTodoItem}>Cancel</button>
+                  <button type="submit">Save</button>
                 </div>
               </form>
             </div>

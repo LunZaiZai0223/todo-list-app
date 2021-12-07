@@ -31,10 +31,11 @@ const InputForm = (props) => {
           onChange={handleChange}
           className="todo-input"
         />
-        <input
+        <button
           type="submit"
           className="todo-input-submit"
-        />
+        >+
+        </button>
       </div>
     </form>
   );

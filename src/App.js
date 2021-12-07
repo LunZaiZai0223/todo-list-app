@@ -18,6 +18,7 @@ function App () {
   const [isEditing, setIsEditing] = useState(null);
   const [editingInput, setEditingInput] = useState('');
   const [currentDate, setCurrentDate] = useState({});
+  console.log(currentDate);
   console.log('現在的 editingInput 為', editingInput);
   // useEffect section
   // useEffect(() => { changeFilterTodos(); }, []);
@@ -53,11 +54,12 @@ function App () {
 
     const tempMonth = new Date().getMonth();
     const tempDay = new Date().getDay();
-    const month = monthList.filter((month) => month.num === tempMonth);
+    const month = monthList.filter((month) => month.num === tempMonth)[0].month;
     const date = new Date().getDate();
-    const day = dayOfWeekList.filter((day) => day.num === tempDay);
+    const day = dayOfWeekList.filter((day) => day.num === tempDay)[0].day;
 
     setCurrentDate({ month, date, day });
+    console.log(currentDate);
   }
 
   // 篩選需要的 Component
@@ -88,7 +90,10 @@ function App () {
   return (
     <div className="container">
       <div className="todo-card">
-        <TodoHeader />
+        <TodoHeader
+          currentDate={currentDate}
+          todos={todos}
+        />
         {console.log('App render')}
         <InputForm
           inputText={inputText}
