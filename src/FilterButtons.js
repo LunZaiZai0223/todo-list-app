@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FilterButtons = (props) => {
-  const { setFilterState } = props;
+  const { setFilterState, filterState } = props;
 
   function handleClick (filterType) {
     isAll(filterType);
@@ -28,9 +28,12 @@ const FilterButtons = (props) => {
 
   return (
     <div className="filter-buttons-container">
-      <button onClick={() => handleClick('all')}>ALL</button>
-      <button onClick={() => handleClick('active')}>ACTIVE</button>
-      <button onClick={() => handleClick('completed')}>COMPLETED</button>
+      <button
+        className={filterState === 'all' ? "filter-button-is-selected" : "default-filter-button"} onClick={() => handleClick('all')}>ALL</button>
+      <button
+        className={filterState === 'active' ? "filter-button-is-selected" : "default-filter-button"} onClick={() => handleClick('active')}>ACTIVE</button>
+      <button
+        className={filterState === 'completed' ? "filter-button-is-selected" : "default-filter-button"} onClick={() => handleClick('completed')}>COMPLETED</button>
     </div>
   )
 }

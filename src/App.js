@@ -113,6 +113,7 @@ function App () {
         />
         <FilterButtons
           setFilterState={setFilterState}
+          filterState={filterState}
         />
       </div>
     </div>

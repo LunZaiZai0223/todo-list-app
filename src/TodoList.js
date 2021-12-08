@@ -56,8 +56,19 @@ const TodoList = (props) => {
     setIsEditing(null);
   }
 
+  // Noto do
+  function Noto (props) {
+    const { todos } = props;
+    if (todos.length === 0) {
+      return (
+        <p className="nothing-to-do">Nothing To Do</p>
+      )
+    } return null
+  }
+
   return (
     <div className="todo-list-container">
+      <Noto todos={todos} />
       <ul className="todo-list">
         {filterTodos.map((todo) => <li className="todo-item-wrapper" key={todo.id}>
           {isEditing === todo.id ? (
@@ -77,11 +88,22 @@ const TodoList = (props) => {
             </div>
           ) : (
             <div className="todo-item">
-              <p>{todo.assignment}</p>
+              <div className="todo-complete-item">
+                <input
+                  type="checkbox"
+                  id={todo.id}
+                  onChange={() => handleClickInTodoItem('complete', todo.id)}
+                  className={todo.isCompleted ? 'todo-is-completed' : 'todo-is-not-completed-yet'}
+                />
+                <label
+                  className={todo.isCompleted ? 'todo-is-completed-text' : ''}
+                  htmlFor={todo.id}>
+                  {todo.assignment}
+                </label>
+              </div>
               <div className="todo-button-group">
-                <button onClick={() => handleClickInTodoItem('complete', todo.id)}>Complete</button>
-                <button onClick={() => handleClickInTodoItem('edit', todo.id)}>Edit</button>
-                <button onClick={() => handleClickInTodoItem('delete', todo.id)}>Delete</button>
+                <button onClick={() => handleClickInTodoItem('edit', todo.id)}><i className="fas fa-edit"></i></button>
+                <button onClick={() => handleClickInTodoItem('delete', todo.id)}><i className="fas fa-trash-alt"></i></button>
               </div>
             </div>
           )}
