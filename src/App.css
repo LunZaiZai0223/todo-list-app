@@ -44,7 +44,7 @@ body,
 }
 
 .todo-card {
-  min-width: 450px;
+  max-width: 450px;
   background-color: #ffff;
   border-radius: 5px;
 }
@@ -58,6 +58,10 @@ body,
   background-color: #fbfbfb;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.date-wrapper {
+  margin-right: 2.5rem;
 }
 
 .date-wrapper .date {
@@ -100,13 +104,15 @@ body,
 }
 .input-wrapper .todo-input-submit {
   flex: 1;
-  font-size: 30px;
+  font-size: 20px;
   border-radius: 50%;
   border: none;
   padding: 5px 0;
   background-color: var(--red);
   color: #fff;
   cursor: pointer;
+  text-align: center;
+  font-weight: 600;
 }
 
 .filter-buttons-container {
