@@ -6,11 +6,9 @@ import InputForm from './InputForm.js';
 import TodoList from './TodoList.js';
 import FilterButtons from './FilterButtons.js';
 import TodoHeader from './TodoHeader.js';
-import Todo from './Todo';
 
 function App () {
   const [inputText, setInputText] = useState('');
-  console.log(inputText);
   // Todo 的內容要有 {assignment: xxx, isCompleted, id:xxx}
   const [todos, setTodos] = useState([]);
   const [filterState, setFilterState] = useState('all');
@@ -18,8 +16,7 @@ function App () {
   const [isEditing, setIsEditing] = useState(null);
   const [editingInput, setEditingInput] = useState('');
   const [currentDate, setCurrentDate] = useState({});
-  console.log(currentDate);
-  console.log('現在的 editingInput 為', editingInput);
+
   // useEffect section
   // useEffect(() => { changeFilterTodos(); }, []);
   // useEffect => 每次 filterState 有更改的話就重新篩選
@@ -59,20 +56,15 @@ function App () {
     const day = dayOfWeekList.filter((day) => day.num === tempDay)[0].day;
 
     setCurrentDate({ month, date, day });
-    console.log(currentDate);
   }
 
   // 篩選需要的 Component
   function changeFilterTodos () {
-    console.log('changeFilterTodos!!!!!!!')
-    console.log(todos);
     if (filterState === 'all') {
       showAllTodos();
     } else if (filterState === 'active') {
-      console.log('showing only active todos');
       showOnlyActiveTodos();
     } else if (filterState === 'completed') {
-      console.log('showing only completed todos');
       showOnlyCompletedTodos();
     }
   }
@@ -94,7 +86,6 @@ function App () {
           currentDate={currentDate}
           todos={todos}
         />
-        {console.log('App render')}
         <InputForm
           inputText={inputText}
           setInputText={setInputText}

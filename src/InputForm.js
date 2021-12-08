@@ -2,8 +2,6 @@ import React from 'react';
 
 const InputForm = (props) => {
   const { todos, setTodos, inputText, setInputText } = props;
-  console.log(inputText);
-  console.log(todos);
 
   // Events
   function handleChange (event) {
@@ -11,7 +9,6 @@ const InputForm = (props) => {
   }
   function handleSubmit (event) {
     event.preventDefault();
-    console.log('發送表單');
     setTodos([
       ...todos,
       { assignment: inputText, isCompleted: false, id: new Date().getTime() }

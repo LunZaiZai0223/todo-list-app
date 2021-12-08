@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-
-// 匯入其他 Component
-import Todo from './Todo.js';
-
+import React from 'react';
 
 const TodoList = (props) => {
-  const { todos, setTodos, filterState, filterTodos, setEditingInput, editingInput, isEditing, setIsEditing } = props;
+  const { todos, setTodos, filterTodos, setEditingInput, editingInput, isEditing, setIsEditing } = props;
 
   // Click Event In Todo Item
   function handleClickInTodoItem (btnType, id) {
